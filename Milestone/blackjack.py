@@ -10,7 +10,7 @@ values = {'Two':2, 'Three':3, 'Four':4, 'Five':5, 'Six':6, 'Seven':7, 'Eight':8,
 
 playing = True
 
-##Card class
+##Card Class
 class Card:
     def __init__(self,suit,rank):
         self.suit = suit
@@ -33,13 +33,39 @@ class Deck:
             deck_comp += '\n '+card.__str__() #Add each card onject's print string
         return 'The deck has: ' + deck_comp
 
-        def shuffle(self):
-            random.shuffle(self.deck)
+    def shuffle(self):
+        random.shuffle(self.deck)
 
-        def deal(self):
-            single_card = self.deck.pop()
-            return single_card
+    def deal(self):
+        single_card = self.deck.pop()
+        return single_card
 
 ##Testing Deck
+# test_deck = Deck()
+# print(test_deck)
+
+##Hand Class
+class Hand:
+    def __init__(self):
+        self.cards = []     #Starts with an empty list
+        self.value = 0      #Starts with zero value
+        self.aces = 0       #add an attribute to keep track of aces
+
+    def add_card(self,card):
+        self.cards.append(card)
+        self.value += values[card.rank]
+
+    def adjust_for_aces(self):
+        pass
+
+
+##Testing Hand and Value
 test_deck = Deck()
-print(test_deck)
+test_deck.shuffle()
+test_player = Hand()
+test_player.add_card(test_deck.deal())
+test_player.add_card(test_deck.deal())
+test_player.value
+
+for card in test_player.cards:
+    print(card)
