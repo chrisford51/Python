@@ -56,16 +56,43 @@ class Hand:
         self.value += values[card.rank]
 
     def adjust_for_aces(self):
-        pass
+        while self.value > 21 and self.aces:
+            self.value -= 10
+            self.aces -= 1
 
 
 ##Testing Hand and Value
-test_deck = Deck()
-test_deck.shuffle()
-test_player = Hand()
-test_player.add_card(test_deck.deal())
-test_player.add_card(test_deck.deal())
-test_player.value
+# test_deck = Deck()
+# test_deck.shuffle()
+# test_player = Hand()
+# test_player.add_card(test_deck.deal())
+# test_player.add_card(test_deck.deal())
+# test_player.value
+#
+# for card in test_player.cards:
+#     print(card)
 
-for card in test_player.cards:
-    print(card)
+##Chips Class
+class Chips:
+    def __init__(self):
+        self.total = 100 # Number of chips, can be set to any amount or supplied by user input
+        self.bet = 0
+
+    def win_bet(self):
+        self.total += self.bet
+
+    def lose_bet(self):
+        self.total -= self.bet
+
+    def take_bet(chips):
+
+        while True:
+            try:
+                chips.bet = int(input('How many chips would you like to bet? '))
+            except ValueError:
+                print('Sorry, a bet must be an integer!')
+            else:
+                if chips.bet > chips.total:
+                    print("Sorry, your bet can't exceed ",chips.total)
+                else:
+                    break
